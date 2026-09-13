@@ -6,7 +6,7 @@ This Python script embeds a cover image (`.jpg`, `.jpeg`, or `.png`) directly in
 
 * **Wide Format Support:** Works with `.mp3`, `.flac`, `.m4a`, and `.mp4` files.
 * **Windows-Friendly MP3 Tagging:** Saves MP3 files using ID3v2.3 tags, ensuring that thumbnails and properties show up properly in Windows Explorer.
-* **Smart Auto-Detection:** Automatically scans and picks the best image file (preferring names like `cover` or `folder`) if you don't explicitly pass one.
+* **Interactive Prompts & Smart Auto-Detection:** The script prompts you directly in the terminal for file locations. If you leave the image prompt blank, it automatically scans and picks the best image file (preferring names like `cover` or `folder`).
 
 ---
 
@@ -59,29 +59,23 @@ pip install -r requirements.txt
 
 You can run the script directly from your terminal. Make sure your virtual environment remains active while running these commands.
 
-### Basic Execution (Auto-Detect)
-If you place the script directly inside your album folder alongside a `cover.jpg` file, simply run:
 ```bash
 python add_album_art.py
 ```
-*The script will automatically detect the music files and pick the best image candidate.*
 
-### Specify a Custom Image
-To point the script to a specific image file:
-```bash
-python add_album_art.py --image path/to/art.png
-```
+When you run the script, it will guide you step-by-step through interactive prompts:
 
-### Target a Different Directory
-To process music files located in a completely different folder:
-```bash
-python add_album_art.py --dir /path/to/music/album
+### 1. Specify the Music Directory
+```text
+Enter the path to the music directory (Press Enter for current directory): /path/to/my/album
 ```
+*If you place the script directly inside your album folder, simply press Enter.*
 
-### Combine Both Arguments
-```bash
-python add_album_art.py --image blueprints.jpg --dir /home/user/music/rock
+### 2. Specify the Cover Image
+```text
+Enter the path to the cover image (Press Enter to auto-detect: cover.jpg): 
 ```
+*Press Enter to accept the auto-detected file found in the directory, or type a custom path to a specific image file (e.g., `../artwork/front.png`).*
 
 ---
 

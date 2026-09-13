@@ -2,19 +2,13 @@
 """
 add_album_art.py
 
-Embeds a cover image as album art into all audio files in the current
-directory (FLAC, MP3, M4A/MP4, AAC).
-
-Usage:
-    python add_album_art.py
-    python add_album_art.py --image cover.jpg
-    python add_album_art.py --image cover.png --dir /path/to/music
+Embeds a cover image as album art into all audio files in a specified
+directory (FLAC, MP3, M4A/MP4, AAC) by prompting the user for paths.
 
 Requires:
     pip install mutagen
 """
 
-import argparse
 import os
 import sys
 
@@ -121,41 +115,47 @@ def process_file(path, image_data, mime):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Embed album art into audio files.")
-    parser.add_argument(
-        "--image", "-i",
-        help="Path to the cover image (jpg/png). If omitted, the script "
-             "auto-detects an image in the target directory.",
-    )
-    parser.add_argument(
-        "--dir", "-d",
-        default=".",
-        help="Directory containing the audio files (default: current directory).",
-    )
-    args = parser.parse_args()
+    print("--- Audio Album Art Embedder ---\n")
 
-    directory = os.path.abspath(args.dir)
+    # 1. Ask user for the audio directory
+    dir_input = input("Enter the path to the music directory (Press Enter for current directory): ").strip()
+    if not dir_input:
+        dir_input = "."
+    
+    directory = os.path.abspath(dir_input)
+    if not os.path.isdir(directory):
+        sys.exit(f"Error: The directory '{directory}' does not exist.")
 
-    image_path = args.image or find_cover_image(directory)
+    # 2. Ask user for the image path (with auto-detection fallback)
+    auto_image = find_cover_image(directory)
+    prompt_str = "Enter the path to the cover image"
+    if auto_image:
+        prompt_str += f" (Press Enter to auto-detect: {os.path.basename(auto_image)})"
+    prompt_str += ": "
+
+    image_input = input(prompt_str).strip()
+    image_path = image_input if image_input else auto_image
+
     if not image_path or not os.path.isfile(image_path):
-        sys.exit(
-            "No cover image found. Place a .jpg/.png file in the directory "
-            "or pass one explicitly with --image."
-        )
+        sys.exit("Error: No valid cover image found or specified.")
 
+    # 3. Read image data
     with open(image_path, "rb") as f:
         image_data = f.read()
     mime = guess_mime(image_path)
 
-    print(f"Using cover image: {image_path} ({mime})")
+    print(f"\nUsing cover image: {image_path} ({mime})")
 
+    # 4. Process the audio files
     audio_files = [
         f for f in os.listdir(directory)
         if f.lower().endswith(AUDIO_EXTS)
     ]
 
     if not audio_files:
-        sys.exit("No audio files found in the directory.")
+        sys.exit("Error: No supported audio files found in the directory.")
+
+    print(f"Found {len(audio_files)} audio file(s). Processing...\n")
 
     ok, failed = 0, 0
     for name in sorted(audio_files):
