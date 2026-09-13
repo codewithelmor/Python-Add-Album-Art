@@ -1,0 +1,48 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: add_album_art.py (current dir)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/add_album_art.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": []
+        },
+        {
+            "name": "Python: add_album_art.py (custom image + dir)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/add_album_art.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [
+                "--image", "${input:coverImage}",
+                "--dir", "${input:audioDir}"
+            ]
+        },
+        {
+            "name": "Python: Current File",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        }
+    ],
+    "inputs": [
+        {
+            "id": "coverImage",
+            "type": "promptString",
+            "description": "Path to cover image (jpg/png)",
+            "default": "cover.jpg"
+        },
+        {
+            "id": "audioDir",
+            "type": "promptString",
+            "description": "Directory containing audio files",
+            "default": "."
+        }
+    ]
+}
