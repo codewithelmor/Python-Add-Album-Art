@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-add_album_art.py
+main.py
 
 Embeds a cover image as album art into all audio files in a specified
 directory (FLAC, MP3, M4A/MP4, AAC) by prompting the user for paths.

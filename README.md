@@ -15,7 +15,7 @@ This Python script embeds a cover image (`.jpg`, `.jpeg`, or `.png`) directly in
 This script requires Python 3 and the `mutagen` audio tagging library. Follow these steps to set up an isolated Python virtual environment and install the required dependencies.
 
 ### 1. Clone or Copy the Files
-Ensure `add_album_art.py`, `requirements.txt`, and your music files are ready in your working environment.
+Ensure `main.py`, `requirements.txt`, and your music files are ready in your working environment.
 
 ### 2. Create a Virtual Environment
 
@@ -60,7 +60,7 @@ pip install -r requirements.txt
 You can run the script directly from your terminal. Make sure your virtual environment remains active while running these commands.
 
 ```bash
-python add_album_art.py
+python main.py
 ```
 
 When you run the script, it will guide you step-by-step through interactive prompts:

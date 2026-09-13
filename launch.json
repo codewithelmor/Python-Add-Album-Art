@@ -2,19 +2,19 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: add_album_art.py (current dir)",
+            "name": "Python: main.py (current dir)",
             "type": "debugpy",
             "request": "launch",
-            "program": "${workspaceFolder}/add_album_art.py",
+            "program": "${workspaceFolder}/main.py",
             "console": "integratedTerminal",
             "justMyCode": true,
             "args": []
         },
         {
-            "name": "Python: add_album_art.py (custom image + dir)",
+            "name": "Python: main.py (custom image + dir)",
             "type": "debugpy",
             "request": "launch",
-            "program": "${workspaceFolder}/add_album_art.py",
+            "program": "${workspaceFolder}/main.py",
             "console": "integratedTerminal",
             "justMyCode": true,
             "args": [
